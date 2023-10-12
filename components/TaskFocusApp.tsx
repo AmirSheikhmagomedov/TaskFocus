@@ -1,0 +1,164 @@
+'use client'
+
+import { useTaskLists, useTasks } from '@/store/store'
+import AddTaskInput from './AddTaskInput'
+import Lists from './Lists'
+import NewListButton from './NewListButton'
+import Search from './Search'
+import TaskList from './TaskList'
+import TaskListHeader from './TaskListHeader'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { BeatLoader } from 'react-spinners'
+import OverlayInput from './NewListInputOverlay'
+import { AnimatePresence } from 'framer-motion'
+import RenameTaskListOverlay from './RenameTaskListOverlay'
+import RenameTaskOverlay from './RenameTaskOverlay'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+import SearchTaskList from './SearchTaskList'
+
+export default function TaskFocusApp() {
+  const {
+    isLoading,
+    fetchTaskLists,
+    taskLists,
+    setActiveTaskListId,
+    activeTaskListId,
+  } = useTaskLists()
+
+  const { fetchTasks, search } = useTasks()
+
+  const [isOverlayOpen, setIsOverlayOpen] = useState<boolean>(false)
+  const [isRenameOverlayOpen, setIsRenameOverlayOpen] = useState<boolean>(false)
+  const [isRenameTaskOverlayOpen, setIsRenameTaskOverlayOpen] =
+    useState<boolean>(false)
+  const [renameListId, setRenameListId] = useState<string>('')
+  const [currentListName, setCurrentListName] = useState('')
+  const [currentTaskId, setCurrentTaskId] = useState<string>('')
+  const [currentTaskName, setCurrentTaskName] = useState<string>('')
+  const [taskAnimation, enableTaskAnimation] = useAutoAnimate()
+
+  const [searchValue, setSearchValue] = useState<string>('')
+
+  const disableTask = () => {
+    enableTaskAnimation(false)
+  }
+  const enableTask = () => {
+    enableTaskAnimation(true)
+  }
+
+  useEffect(() => {
+    fetchTaskLists()
+    fetchTasks()
+  }, [fetchTaskLists, isLoading, fetchTasks])
+
+  useEffect(() => {
+    if (isOverlayOpen || isRenameOverlayOpen || isRenameTaskOverlayOpen) {
+      document.body.style.overflow = 'hidden'
+    }
+    if (!isOverlayOpen && !isRenameOverlayOpen && !isRenameTaskOverlayOpen) {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isOverlayOpen, isRenameOverlayOpen, isRenameTaskOverlayOpen])
+
+  return (
+    <>
+      {isLoading && (
+        <div className="bg-white w-[100%] h-[480px] rounded-[4px] shadow-md flex items-center justify-center">
+          <BeatLoader color="#007aff" />
+        </div>
+      )}
+      {!isLoading && (
+        <div className="rounded-[4px] shadow-md flex max-[880px]:flex-col max-[880px]:items-center max-[880px]:gap-[40px] max-[880px]:shadow-none">
+          <div className="max-w-[300px] max-h-[480px] w-[100%] h-[480px] bg-white border-r-[1px] border-[#B8B8B8] rounded-l-[4px] z-[0] max-[880px]:max-w-[100%] max-[880px]:h-[392px] max-[880px]:rounded-[4px] max-[880px]:border-r-[0px]">
+            <Search
+              searchValue={searchValue}
+              setSearchValue={(e: ChangeEvent<HTMLInputElement>) => {
+                setSearchValue(e.target.value)
+              }}
+            />
+            <Lists
+              clearSearch={() => {
+                setSearchValue('')
+              }}
+              setCurrentListName={setCurrentListName}
+              setIsRenameOverlayOpen={setIsRenameOverlayOpen}
+              setRenameListId={setRenameListId}
+              taskLists={taskLists}
+              setActiveTaskListId={setActiveTaskListId}
+              activeTaskListId={activeTaskListId!}
+            />
+            <NewListButton
+              onClick={() => {
+                setIsOverlayOpen(true)
+              }}
+            />
+          </div>
+          {activeTaskListId && !search && (
+            <div className="max-w-[550px] w-[100%] bg-white max-h-[480px] h-[480px] rounded-r-[4px] max-[880px]:border-[1px] max-[880px]:border-[#B8B8B8] max-[880px]:rounded-[4px]">
+              <TaskListHeader />
+              <TaskList
+                ref={taskAnimation}
+                setIsRenameTaskOverlayOpen={setIsRenameTaskOverlayOpen}
+                setCurrentTaskId={setCurrentTaskId}
+                setCurrentTaskName={setCurrentTaskName}
+              />
+              <AddTaskInput
+                disableAnimation={disableTask}
+                enableAnimation={enableTask}
+              />
+            </div>
+          )}
+          {search && (
+            <SearchTaskList
+              ref={taskAnimation}
+              setIsRenameTaskOverlayOpen={setIsRenameTaskOverlayOpen}
+              setCurrentTaskId={setCurrentTaskId}
+              setCurrentTaskName={setCurrentTaskName}
+            />
+          )}
+          {!activeTaskListId && !search && (
+            <div
+              className="max-w-[550px] w-[100%] bg-white max-h-[480px] h-[480px] rounded-r-[4px]
+						 flex items-center justify-center max-[880px]:border-[1px] max-[880px]:border-[#B8B8B8] max-[880px]:rounded-[4px]"
+            >
+              <p className="text-[18px] text-[#939393] select-none">
+                No task list selected
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+      <AnimatePresence>
+        {isOverlayOpen && (
+          <OverlayInput
+            onClickAway={() => {
+              setIsOverlayOpen(false)
+            }}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isRenameOverlayOpen && (
+          <RenameTaskListOverlay
+            currentListName={currentListName}
+            taskListId={renameListId}
+            onClickAway={() => {
+              setIsRenameOverlayOpen(false)
+            }}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isRenameTaskOverlayOpen && (
+          <RenameTaskOverlay
+            currentTaskName={currentTaskName}
+            taskId={currentTaskId}
+            onClickAway={() => {
+              setIsRenameTaskOverlayOpen(false)
+            }}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
