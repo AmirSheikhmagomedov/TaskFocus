@@ -6,8 +6,8 @@ import {
   useEffect,
   useState,
 } from 'react'
-import TaskItem from './TaskItem'
 import { useTaskLists, useTasks } from '@/store/store'
+import TaskItem from './TaskListItem'
 
 interface Props {
   setCurrentTaskName: Dispatch<SetStateAction<string>>

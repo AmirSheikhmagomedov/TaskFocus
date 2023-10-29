@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Logo from '../public/icons/loginPageLogo.svg'
 import Image from 'next/image'
-import { signUp } from '@/lib/user/signUp'
 import { signIn } from 'next-auth/react'
 import AES from 'crypto-js/aes'
 import encUTF8 from 'crypto-js/enc-utf8'
+import { signUp } from '@/lib/user/signUp'
 import NewPassword from './NewPassword'
+import Logo from '../public/icons/loginPageLogo.svg'
 
 export default function EmailVerification({
   email,
@@ -80,7 +80,7 @@ export default function EmailVerification({
 
   return (
     <>
-      {isChangePassword && <NewPassword email={email} />}
+      {isChangePassword && <NewPassword />}
       {!isChangePassword && (
         <div className="w-[100vw] h-[100dvh] bg-white flex items-center justify-center flex-col absolute">
           <Image

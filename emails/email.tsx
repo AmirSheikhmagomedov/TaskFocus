@@ -1,16 +1,14 @@
+import * as React from 'react'
 import {
   Body,
   Container,
   Head,
   Heading,
   Html,
-  Img,
   Preview,
   Section,
   Text,
 } from '@react-email/components'
-
-import * as React from 'react'
 
 interface Props {
   code?: string

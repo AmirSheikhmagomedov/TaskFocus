@@ -1,8 +1,8 @@
 'use client'
 
-import { useTasks } from '@/store/store'
-import { motion } from 'framer-motion'
 import { KeyboardEvent, useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { useTasks } from '@/store/store'
 
 export default function RenameTaskOverlay({
   onClickAway,

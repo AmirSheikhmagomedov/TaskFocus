@@ -1,6 +1,6 @@
-import { prisma } from '@/server/db'
-import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
+import { prisma } from '@/server/db'
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     return new NextResponse('Account was deleted')
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to create a list' },
+      { error: 'Failed to delete a user' },
       { status: 409 }
     )
   }

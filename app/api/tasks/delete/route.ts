@@ -1,6 +1,6 @@
-import { prisma } from '@/server/db'
-import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
+import { prisma } from '@/server/db'
 
 export async function DELETE(req: NextRequest) {
   try {

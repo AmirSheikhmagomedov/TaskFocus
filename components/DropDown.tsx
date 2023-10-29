@@ -1,16 +1,10 @@
 'use client'
 
+import { Dispatch, MouseEvent, SetStateAction, forwardRef } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import pencil from '../public/icons/pencil.svg'
 import trashCan from '../public/icons/trash-can.svg'
-import { motion } from 'framer-motion'
-import {
-  Dispatch,
-  MouseEvent,
-  SetStateAction,
-  forwardRef,
-  useEffect,
-} from 'react'
 import { useTaskLists, useTasks } from '@/store/store'
 
 interface Props {

@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Logo from '../../public/icons/loginPageLogo.svg'
-import Image from 'next/image'
-import EmailVerification from '@/components/Verification'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
+import EmailVerification from '@/components/pages/Verification'
+import Logo from '../../public/icons/loginPageLogo.svg'
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState<string>('')

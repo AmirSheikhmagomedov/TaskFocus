@@ -1,5 +1,5 @@
-import { useTasks, useTaskLists } from '@/store/store'
 import { KeyboardEvent, useRef } from 'react'
+import { useTasks, useTaskLists } from '@/store/store'
 
 export default function AddTaskInput({
   disableAnimation,

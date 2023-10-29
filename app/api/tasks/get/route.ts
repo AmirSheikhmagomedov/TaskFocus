@@ -1,7 +1,7 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 import { prisma } from '@/server/db'
 import { TaskList } from '@/store/store'
-import { getToken } from 'next-auth/jwt'
-import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
   try {

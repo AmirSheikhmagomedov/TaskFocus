@@ -1,8 +1,9 @@
 'use client'
+
 import Image from 'next/image'
-import profile from '../public/images/no-profile-image.jpg'
-import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
+import profile from '../public/images/no-profile-image.jpg'
 
 export default function Profile() {
   const { data: session } = useSession()

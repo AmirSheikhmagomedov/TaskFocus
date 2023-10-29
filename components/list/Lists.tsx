@@ -1,15 +1,8 @@
 'use client'
 
-import {
-  Dispatch,
-  SetStateAction,
-  forwardRef,
-  useState,
-  useEffect,
-} from 'react'
-import ListItem from './ListItem'
+import { Dispatch, SetStateAction, forwardRef, useState } from 'react'
 import { TaskList } from '@/store/store'
-import DetectableOverflow from 'react-detectable-overflow'
+import ListItem from './ListItem'
 
 interface Props {
   taskLists: TaskList[]

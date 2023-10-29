@@ -1,7 +1,7 @@
-import { prisma } from '@/server/db'
-import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 import bcrypt from 'bcrypt'
+import { prisma } from '@/server/db'
 
 export async function POST(req: NextRequest) {
   try {

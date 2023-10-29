@@ -1,11 +1,11 @@
-import SignInPage from '@/components/SIgninPage'
 import { Metadata } from 'next'
+import SignInPage from '@/components/pages/SIgninPage'
 
 export const metadata: Metadata = {
   title: 'Sign In | TaskFocus',
   description: 'Sign in page',
 }
 
-export default function page() {
+export default function SignIn() {
   return <SignInPage />
 }

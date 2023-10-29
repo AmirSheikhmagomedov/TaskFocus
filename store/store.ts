@@ -1,6 +1,7 @@
 import { create } from 'zustand'
-import { getTasks } from '@/lib/tasks/getTasks'
+import { immer } from 'zustand/middleware/immer'
 import { devtools, persist } from 'zustand/middleware'
+import { getTasks } from '@/lib/tasks/getTasks'
 import { createTask } from '@/lib/tasks/createTask'
 import { updateTask } from '@/lib/tasks/updateTask'
 import { deleteTask } from '@/lib/tasks/deleteTask'
@@ -10,7 +11,6 @@ import { createTaskList } from '@/lib/taskLists/createTaskList'
 import { getTaskLists } from '@/lib/taskLists/getTaskLists'
 import { updateTaskList } from '@/lib/taskLists/updateTaskList'
 import { deleteTaskList } from '@/lib/taskLists/deleteTaskList'
-import { immer } from 'zustand/middleware/immer'
 
 interface Task {
   id: string

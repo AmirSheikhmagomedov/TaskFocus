@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import Email from '../../../emails/email'
 import AES from 'crypto-js/aes'
 import encUTF8 from 'crypto-js/enc-utf8'
+import Email from '../../../emails/email'
 
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY)
 

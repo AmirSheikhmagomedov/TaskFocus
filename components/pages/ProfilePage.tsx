@@ -1,12 +1,12 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import profile from '../public/images/no-profile-image.jpg'
-import { useState, useEffect } from 'react'
-import EmailVerification from '@/components/Verification'
 import { AnimatePresence, motion } from 'framer-motion'
+import EmailVerification from '@/components/pages/Verification'
+import profile from '../public/images/no-profile-image.jpg'
 
 export default function ProfilePage() {
   const { data: session } = useSession()

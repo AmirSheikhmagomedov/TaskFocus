@@ -1,5 +1,5 @@
-import { prisma } from '@/server/db'
 import { NextRequest, NextResponse } from 'next/server'
+import { prisma } from '@/server/db'
 
 export async function POST(req: NextRequest) {
   try {

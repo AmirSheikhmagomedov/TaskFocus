@@ -1,5 +1,7 @@
+'use client'
+
 import Image from 'next/image'
-import cross from '../public/icons/cross.svg'
+import cross from '../../public/icons/cross.svg'
 
 export default function NewListButton({ onClick }: { onClick: () => void }) {
   return (

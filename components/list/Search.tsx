@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 import { ChangeEvent, useEffect } from 'react'
-import searchIcon from '../public/icons/search-grey.svg'
 import { useTasks, useTaskLists } from '@/store/store'
 import { useDebounce } from '@/hooks/useDebounce'
+import searchIcon from '../../public/icons/search-grey.svg'
 
 export default function Search({
   searchValue,
@@ -31,7 +31,7 @@ export default function Search({
           maxLength={50}
           value={searchValue}
           onChange={setSearchValue}
-					disabled={!taskLists.length}
+          disabled={!taskLists.length}
           placeholder="Search"
           className="w-[160px] h-[28px] border-[1px] rounded-[4px] border-[#B8B8B8] pl-[28px] placeholder:font-medium focus:outline-[0px] focus:border-[#007AFF] hover:border-[#007AFF] placeholder:text-[14px] placeholder:select-none disabled:hover:border-[#B8B8B8]"
         />

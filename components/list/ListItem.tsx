@@ -1,9 +1,4 @@
-import Image from 'next/image'
-import whiteDots from '../public/icons/whiteDots.svg'
-import darkDots from '../public/icons/darkDots.svg'
-import DropDown from './DropDown'
-import ClickAwayListener from 'react-click-away-listener'
-import { AnimatePresence } from 'framer-motion'
+'use client'
 import {
   Dispatch,
   SetStateAction,
@@ -11,8 +6,14 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useTasks } from '@/store/store'
+import Image from 'next/image'
 import { isMobile } from 'react-device-detect'
+import ClickAwayListener from 'react-click-away-listener'
+import { AnimatePresence } from 'framer-motion'
+import { useTasks } from '@/store/store'
+import whiteDots from '../../public/icons/whiteDots.svg'
+import darkDots from '../../public/icons/darkDots.svg'
+import DropDown from '../DropDown'
 
 export default function ListItem({
   isMenuOpen,

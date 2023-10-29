@@ -6,15 +6,15 @@ import {
   useRef,
   useState,
 } from 'react'
-import darkDots from '../public/icons/darkDots.svg'
+import { isMobile } from 'react-device-detect'
+import ClickAwayListener from 'react-click-away-listener'
 import Image from 'next/image'
 import { AnimatePresence } from 'framer-motion'
-import ClickAwayListener from 'react-click-away-listener'
-import DropDown from './DropDown'
 import { useTasks } from '@/store/store'
-import { isMobile } from 'react-device-detect'
+import darkDots from '../../public/icons/darkDots.svg'
+import DropDown from '../DropDown'
 
-export default function TaskItem({
+export default function TaskListItem({
   isMenuOpen,
   openedId,
   moreThanFive,

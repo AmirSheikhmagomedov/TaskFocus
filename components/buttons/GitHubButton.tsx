@@ -1,7 +1,9 @@
-import Image from 'next/image'
-import GitHubIcon from '../public/icons/github.svg'
-import { signIn } from 'next-auth/react'
+'use client'
+
 import { MouseEvent } from 'react'
+import Image from 'next/image'
+import { signIn } from 'next-auth/react'
+import GitHubIcon from '../public/icons/github.svg'
 
 export default function GitHubButton({
   className,

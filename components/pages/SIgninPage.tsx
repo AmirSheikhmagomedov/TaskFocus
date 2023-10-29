@@ -1,14 +1,14 @@
 'use client'
 
-import Image from 'next/image'
-import LoginPageLogo from '../public/icons/loginPageLogo.svg'
-import GoogleButton from '@/components/GoogleButton'
-import GitHubButton from '@/components/GitHubButton'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import Link from 'next/link'
-import { signIn, useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import GoogleButton from '@/components/buttons/GoogleButton'
+import GitHubButton from '@/components/buttons/GitHubButton'
+import LoginPageLogo from '../public/icons/loginPageLogo.svg'
 
 interface Inputs {
   email: string
