@@ -1,8 +1,9 @@
 'use client'
 
+import { memo } from 'react'
 import { useTaskLists, useTasks } from '@/store/store'
 
-export default function TaskListHeader() {
+function TaskListHeader() {
   const { taskLists, activeTaskListId } = useTaskLists()
   const { tasks } = useTasks()
   const taskListName = taskLists.find(
@@ -56,3 +57,5 @@ export default function TaskListHeader() {
     </div>
   )
 }
+
+export default memo(TaskListHeader)

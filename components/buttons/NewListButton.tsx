@@ -1,9 +1,10 @@
 'use client'
 
+import { memo } from 'react'
 import Image from 'next/image'
 import cross from '../../public/icons/cross.svg'
 
-export default function NewListButton({ onClick }: { onClick: () => void }) {
+function NewListButton({ onClick }: { onClick: () => void }) {
   return (
     <button
       className="h-[72px] w-[100%] flex gap-[16px] items-center px-[20px] hover:bg-[#eeeeee] transition-colors"
@@ -22,3 +23,5 @@ export default function NewListButton({ onClick }: { onClick: () => void }) {
     </button>
   )
 }
+
+export default memo(NewListButton)

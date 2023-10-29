@@ -10,15 +10,14 @@ import { useTasks } from '@/store/store'
 import TaskItem from './TaskListItem'
 
 interface Props {
-  setCurrentTaskName: Dispatch<SetStateAction<string>>
-  setCurrentTaskId: Dispatch<SetStateAction<string>>
   setIsRenameTaskOverlayOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export default forwardRef<HTMLDivElement, Props>(function TaskList(props, ref) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [openedId, setOpenedId] = useState<number>()
-  const { fetchTasks, tasks, search } = useTasks()
+  const { fetchTasks, tasks, search, setCurrentTaskName, setCurrentTaskId } =
+    useTasks()
 
   useEffect(() => {
     fetchTasks()
@@ -58,8 +57,8 @@ export default forwardRef<HTMLDivElement, Props>(function TaskList(props, ref) {
           return (
             <TaskItem
               setIsRenameTaskOverlayOpen={props.setIsRenameTaskOverlayOpen}
-              setCurrentTaskId={props.setCurrentTaskId}
-              setCurrentTaskName={props.setCurrentTaskName}
+              setCurrentTaskId={setCurrentTaskId}
+              setCurrentTaskName={setCurrentTaskName}
               moreThanFive={array.length >= 8}
               key={task.id}
               isLast={array.length == index + 1}

@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { BeatLoader } from 'react-spinners'
 import { AnimatePresence } from 'framer-motion'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
@@ -17,13 +17,7 @@ import RenameTaskOverlay from './overlays/RenameTaskOverlay'
 import SearchTaskList from './task-list/SearchTaskList'
 
 export default function TaskFocusApp() {
-  const {
-    isLoading,
-    fetchTaskLists,
-    taskLists,
-    setActiveTaskListId,
-    activeTaskListId,
-  } = useTaskLists()
+  const { isLoading, fetchTaskLists, activeTaskListId } = useTaskLists()
 
   const { fetchTasks, search } = useTasks()
 
@@ -31,13 +25,8 @@ export default function TaskFocusApp() {
   const [isRenameOverlayOpen, setIsRenameOverlayOpen] = useState<boolean>(false)
   const [isRenameTaskOverlayOpen, setIsRenameTaskOverlayOpen] =
     useState<boolean>(false)
-  const [renameListId, setRenameListId] = useState<string>('')
-  const [currentListName, setCurrentListName] = useState('')
-  const [currentTaskId, setCurrentTaskId] = useState<string>('')
-  const [currentTaskName, setCurrentTaskName] = useState<string>('')
-  const [taskAnimation, enableTaskAnimation] = useAutoAnimate()
 
-  const [searchValue, setSearchValue] = useState<string>('')
+  const [taskAnimation, enableTaskAnimation] = useAutoAnimate()
 
   const disableTask = () => {
     enableTaskAnimation(false)
@@ -45,6 +34,18 @@ export default function TaskFocusApp() {
   const enableTask = () => {
     enableTaskAnimation(true)
   }
+
+  const onOverlayOpen = useCallback(() => {
+    setIsOverlayOpen(true)
+  }, [])
+
+  const onRenameOverlayOpen = useCallback(() => {
+    setIsRenameOverlayOpen(true)
+  }, [])
+
+  const onRenameTaskOverlayOpen = useCallback(() => {
+    setIsRenameTaskOverlayOpen(true)
+  }, [])
 
   useEffect(() => {
     fetchTaskLists()
@@ -70,37 +71,16 @@ export default function TaskFocusApp() {
       {!isLoading && (
         <div className="rounded-[4px] shadow-md flex max-[880px]:flex-col max-[880px]:items-center max-[880px]:gap-[40px] max-[880px]:shadow-none">
           <div className="max-w-[300px] max-h-[480px] w-[100%] h-[480px] bg-white border-r-[1px] border-[#B8B8B8] rounded-l-[4px] z-[0] max-[880px]:max-w-[100%] max-[880px]:h-[392px] max-[880px]:rounded-[4px] max-[880px]:border-r-[0px]">
-            <Search
-              searchValue={searchValue}
-              setSearchValue={(e: ChangeEvent<HTMLInputElement>) => {
-                setSearchValue(e.target.value)
-              }}
-            />
-            <Lists
-              clearSearch={() => {
-                setSearchValue('')
-              }}
-              setCurrentListName={setCurrentListName}
-              setIsRenameOverlayOpen={setIsRenameOverlayOpen}
-              setRenameListId={setRenameListId}
-              taskLists={taskLists}
-              setActiveTaskListId={setActiveTaskListId}
-              activeTaskListId={activeTaskListId!}
-            />
-            <NewListButton
-              onClick={() => {
-                setIsOverlayOpen(true)
-              }}
-            />
+            <Search />
+            <Lists setIsRenameOverlayOpen={onRenameOverlayOpen} />
+            <NewListButton onClick={onOverlayOpen} />
           </div>
           {activeTaskListId && !search && (
             <div className="max-w-[550px] w-[100%] bg-white max-h-[480px] h-[480px] rounded-r-[4px] max-[880px]:border-[1px] max-[880px]:border-[#B8B8B8] max-[880px]:rounded-[4px]">
               <TaskListHeader />
               <TaskList
                 ref={taskAnimation}
-                setIsRenameTaskOverlayOpen={setIsRenameTaskOverlayOpen}
-                setCurrentTaskId={setCurrentTaskId}
-                setCurrentTaskName={setCurrentTaskName}
+                setIsRenameTaskOverlayOpen={onRenameTaskOverlayOpen}
               />
               <AddTaskInput
                 disableAnimation={disableTask}
@@ -111,9 +91,7 @@ export default function TaskFocusApp() {
           {search && (
             <SearchTaskList
               ref={taskAnimation}
-              setIsRenameTaskOverlayOpen={setIsRenameTaskOverlayOpen}
-              setCurrentTaskId={setCurrentTaskId}
-              setCurrentTaskName={setCurrentTaskName}
+              setIsRenameTaskOverlayOpen={onRenameTaskOverlayOpen}
             />
           )}
           {!activeTaskListId && !search && (
@@ -140,8 +118,6 @@ export default function TaskFocusApp() {
       <AnimatePresence>
         {isRenameOverlayOpen && (
           <RenameTaskListOverlay
-            currentListName={currentListName}
-            taskListId={renameListId}
             onClickAway={() => {
               setIsRenameOverlayOpen(false)
             }}
@@ -151,8 +127,6 @@ export default function TaskFocusApp() {
       <AnimatePresence>
         {isRenameTaskOverlayOpen && (
           <RenameTaskOverlay
-            currentTaskName={currentTaskName}
-            taskId={currentTaskId}
             onClickAway={() => {
               setIsRenameTaskOverlayOpen(false)
             }}

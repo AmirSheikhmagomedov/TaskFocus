@@ -10,7 +10,7 @@ import { signUp } from '@/lib/user/signUp'
 import GoogleButton from '@/components/buttons/GoogleButton'
 import GitHubButton from '@/components/buttons/GitHubButton'
 import EmailVerification from '@/components/pages/Verification'
-import LoginPageLogo from '../public/icons/loginPageLogo.svg'
+import LoginPageLogo from '../../public/icons/loginPageLogo.svg'
 
 interface Inputs {
   email: string

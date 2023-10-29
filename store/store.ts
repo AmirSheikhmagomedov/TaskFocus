@@ -32,6 +32,10 @@ export interface TaskList {
 interface TasksState {
   search: string
   tasks: Task[]
+  currentTaskId: string
+  currentTaskName: string
+  setCurrentTaskId: (currentTaskId: string) => void
+  setCurrentTaskName: (currentTaskName: string) => void
   setSearch: (value: string) => void
   fetchTasks: () => void
   createTask: (
@@ -52,6 +56,10 @@ interface TaskListsState {
   taskLists: TaskList[]
   isLoading: boolean
   activeTaskListId: string | null
+  renameListId: string
+  currentListName: string
+  setRenameListId: (renameListId: string) => void
+  setCurrentListName: (currentListName: string) => void
   setActiveTaskListId: (taskListId: string) => void
   fetchTaskLists: () => void
   createTaskList: (taskListName: string) => void
@@ -64,6 +72,17 @@ export const useTasks = create<TasksState>()(
     devtools((set, get) => ({
       tasks: [],
       search: '',
+      currentTaskId: '',
+      currentTaskName: '',
+
+      setCurrentTaskId: (currentTaskId: string) => {
+        set({ currentTaskId })
+      },
+
+      setCurrentTaskName: (currentTaskName: string) => {
+        set({ currentTaskName })
+      },
+
       emptySearch: (setSearch: () => void) => {
         set({ search: '' })
         setSearch()
@@ -168,6 +187,14 @@ export const useTaskLists = create<TaskListsState>()(
         isLoading: true,
         taskLists: [],
         activeTaskListId: '',
+        renameListId: '',
+        currentListName: '',
+        setRenameListId: (renameListId: string) => {
+          set({ renameListId })
+        },
+        setCurrentListName: currentListName => {
+          set({ currentListName })
+        },
         setActiveTaskListId: taskListId => {
           set({ activeTaskListId: taskListId })
         },

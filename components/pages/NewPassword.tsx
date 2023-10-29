@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import logo from '../public/icons/loginPageLogo.svg'
+import logo from '../../public/icons/loginPageLogo.svg'
 
 export default function NewPassword() {
   const [newPassword, setNewPassword] = useState<string>('')

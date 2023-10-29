@@ -26,7 +26,6 @@ export default function ListItem({
   setCurrentListName,
   setRenameListId,
   setIsRenameOverlayOpen,
-  clearSearch,
 }: {
   onListClick: (listId: string) => void
   onMenuClick: (listId: string) => void
@@ -35,16 +34,15 @@ export default function ListItem({
   activeListId: string
   isMenuOpen: boolean
   openedId: string
-  setRenameListId: Dispatch<SetStateAction<string>>
+  setRenameListId: (renameListId: string) => void
+  setCurrentListName: (currentListName: string) => void
   setIsRenameOverlayOpen: Dispatch<SetStateAction<boolean>>
-  setCurrentListName: Dispatch<SetStateAction<string>>
-  clearSearch: () => void
 }) {
   const label = useRef<HTMLLabelElement | null>(null)
 
   const [height, setHeight] = useState<number>(44)
 
-  const { emptySearch } = useTasks()
+  const { emptySearch, setSearch, search } = useTasks()
 
   useLayoutEffect(() => {
     if (label.current) {
@@ -67,7 +65,7 @@ export default function ListItem({
             e.stopPropagation()
             onListClick(list.id)
             emptySearch(() => {
-              clearSearch()
+              if (search) setSearch('')
             })
           }}
           key={list.id}
@@ -114,7 +112,7 @@ export default function ListItem({
             e.stopPropagation()
             onListClick(list.id)
             emptySearch(() => {
-              clearSearch()
+              if (search) setSearch('')
             })
           }}
           style={{ minHeight: height }}

@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import SignInPage from '@/components/pages/SIgninPage'
+import SignInPage from '@/components/pages/SignInPage'
 
 export const metadata: Metadata = {
   title: 'Sign In | TaskFocus',

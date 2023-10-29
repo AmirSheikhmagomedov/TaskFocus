@@ -33,8 +33,8 @@ export default function TaskListItem({
   isLast: boolean
   isMenuOpen: boolean
   openedId: number
-  setCurrentTaskName: Dispatch<SetStateAction<string>>
-  setCurrentTaskId: Dispatch<SetStateAction<string>>
+  setCurrentTaskName: (currentTaskName: string) => void
+  setCurrentTaskId: (currentTaskId: string) => void
   setIsRenameTaskOverlayOpen: Dispatch<SetStateAction<boolean>>
 }) {
   const { completeTask, uncompleteTask } = useTasks()
@@ -73,7 +73,6 @@ export default function TaskListItem({
           setHeight(180)
           break
       }
-      console.log(numberOfLines)
     }
   }, [label])
 

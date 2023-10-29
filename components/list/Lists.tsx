@@ -1,25 +1,27 @@
 'use client'
 
-import { Dispatch, SetStateAction, forwardRef, useState } from 'react'
-import { TaskList } from '@/store/store'
+import { Dispatch, SetStateAction, useState, memo } from 'react'
+import { useTaskLists } from '@/store/store'
 import ListItem from './ListItem'
 
 interface Props {
-  taskLists: TaskList[]
-  setActiveTaskListId: (taskListId: string) => void
-  activeTaskListId: string
-  setRenameListId: Dispatch<SetStateAction<string>>
   setIsRenameOverlayOpen: Dispatch<SetStateAction<boolean>>
-  setCurrentListName: Dispatch<SetStateAction<string>>
-  clearSearch: () => void
 }
 
-export default forwardRef<HTMLDivElement, Props>(function Lists(props, ref) {
+function Lists(props: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [openedId, setOpenedId] = useState<string>()
 
+  const {
+    setCurrentListName,
+    setRenameListId,
+    taskLists,
+    setActiveTaskListId,
+    activeTaskListId,
+  } = useTaskLists()
+
   const onListClick = (taskListId: string) => {
-    props.setActiveTaskListId(taskListId)
+    setActiveTaskListId(taskListId)
   }
 
   const onMenuCLick = (listId: string) => {
@@ -35,7 +37,7 @@ export default forwardRef<HTMLDivElement, Props>(function Lists(props, ref) {
 
   return (
     <div className="h-[309px] border-b-[1px] border-[#B8B8B8] flex flex-col overflow-auto relative max-[880px]:h-[220px]">
-      {!props.taskLists.length && (
+      {!taskLists.length && (
         <p
           className="text-[18px] text-[#939393] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
 			whitespace-nowrap select-none"
@@ -43,14 +45,13 @@ export default forwardRef<HTMLDivElement, Props>(function Lists(props, ref) {
           ↓ Create a new list ↓
         </p>
       )}
-      {props.taskLists.map(taskList => (
+      {taskLists.map(taskList => (
         <ListItem
-          clearSearch={props.clearSearch}
-          setCurrentListName={props.setCurrentListName}
+          setCurrentListName={setCurrentListName}
           setIsRenameOverlayOpen={props.setIsRenameOverlayOpen}
-          setRenameListId={props.setRenameListId}
+          setRenameListId={setRenameListId}
           key={taskList.id}
-          activeListId={props.activeTaskListId!}
+          activeListId={activeTaskListId!}
           isMenuOpen={isMenuOpen}
           openedId={openedId!}
           list={taskList}
@@ -61,4 +62,6 @@ export default forwardRef<HTMLDivElement, Props>(function Lists(props, ref) {
       ))}
     </div>
   )
-})
+}
+
+export default memo(Lists)

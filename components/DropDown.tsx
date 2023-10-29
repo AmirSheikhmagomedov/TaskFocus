@@ -10,12 +10,12 @@ import { useTaskLists, useTasks } from '@/store/store'
 interface Props {
   biggerTop?: boolean
   taskListId?: string
-  setRenameListId?: Dispatch<SetStateAction<string>>
+  setRenameListId?: (renameListId: string) => void
   setIsRenameOverlayOpen?: Dispatch<SetStateAction<boolean>>
-  setCurrentListName?: Dispatch<SetStateAction<string>>
+  setCurrentListName?: (currentListName: string) => void
   currentListName?: string
-  setCurrentTaskName?: Dispatch<SetStateAction<string>>
-  setCurrentTaskId?: Dispatch<SetStateAction<string>>
+  setCurrentTaskName?: (currentTaskName: string) => void
+  setCurrentTaskId?: (currentTaskId: string) => void
   setIsRenameTaskOverlayOpen?: Dispatch<SetStateAction<boolean>>
   currentTaskName?: string
   taskId?: string

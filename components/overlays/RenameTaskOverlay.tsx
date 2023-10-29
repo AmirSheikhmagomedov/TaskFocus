@@ -6,16 +6,12 @@ import { useTasks } from '@/store/store'
 
 export default function RenameTaskOverlay({
   onClickAway,
-  taskId,
-  currentTaskName,
 }: {
   onClickAway: () => void
-  taskId: string
-  currentTaskName: string
 }) {
-  const [value, setValue] = useState<string>(currentTaskName)
+  const { updateTask, currentTaskId: taskId, currentTaskName } = useTasks()
 
-  const { updateTask } = useTasks()
+  const [value, setValue] = useState<string>(currentTaskName)
 
   const handleSubmit = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {

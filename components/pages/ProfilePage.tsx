@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import EmailVerification from '@/components/pages/Verification'
-import profile from '../public/images/no-profile-image.jpg'
+import profile from '../../public/images/no-profile-image.jpg'
 
 export default function ProfilePage() {
   const { data: session } = useSession()

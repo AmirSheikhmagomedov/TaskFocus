@@ -7,7 +7,7 @@ import AES from 'crypto-js/aes'
 import encUTF8 from 'crypto-js/enc-utf8'
 import { signUp } from '@/lib/user/signUp'
 import NewPassword from './NewPassword'
-import Logo from '../public/icons/loginPageLogo.svg'
+import Logo from '../../public/icons/loginPageLogo.svg'
 
 export default function EmailVerification({
   email,

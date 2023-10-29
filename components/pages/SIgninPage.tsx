@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import GoogleButton from '@/components/buttons/GoogleButton'
 import GitHubButton from '@/components/buttons/GitHubButton'
-import LoginPageLogo from '../public/icons/loginPageLogo.svg'
+import LoginPageLogo from '../../public/icons/loginPageLogo.svg'
 
 interface Inputs {
   email: string

@@ -3,7 +3,7 @@
 import { MouseEvent } from 'react'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
-import GoogleIcon from '../public/icons/google.svg'
+import GoogleIcon from '../../public/icons/google.svg'
 
 export default function GoogleButton({
   className,
